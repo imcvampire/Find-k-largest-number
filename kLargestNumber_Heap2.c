@@ -90,8 +90,7 @@ int main(int argc, char const *argv[])
 		return -1;
 	}
 
-	// generate (n0 - k) number
-	for (i = 0; i < n0 - k; ++i)
+	for (i = 0; i < n0; ++i)
 	{
 		f[i] = rand();
 	}
