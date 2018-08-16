@@ -95,8 +95,20 @@ int main(int argc, char const *argv[])
 		f[i] = rand();
 	}
 
-	// (n0 - k)
+	// nlogn
 	heapify(f, n0 - k);
+
+	// klogn
+	for (i = 0; i < k; ++i)
+	{
+		int temp = rand();
+
+		if (temp > f[0])
+		{
+			f[0] = temp;
+			shiftdown(f, 0, n0 - k);
+		}
+	}
 
 	free(f);
 
