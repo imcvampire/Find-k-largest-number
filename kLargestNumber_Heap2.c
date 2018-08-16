@@ -1,7 +1,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-#define n0 1000000000
+#define n0 400000000
 #define k  600000
 
 int *f;
@@ -89,7 +89,7 @@ int main(int argc, char const *argv[])
 		return -1;
 	}
 
-	// generate k number
+	// generate (n0 - k) number
 	for (i = 0; i < n0 - k; ++i)
 	{
 		f[i] = rand();
