@@ -118,6 +118,11 @@ int main(int argc, char const *argv[])
 		}
 	}
 
+	/**
+	 * The heap will contains max values. Notice: the first value in
+	 * the heap will be the smallest value
+	 * */
+
 	result = f;
 
 	free(result);
