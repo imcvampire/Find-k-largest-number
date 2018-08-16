@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "*.css": "postcss",
+        "*.raml": "yaml",
+        "*.js": "javascriptreact",
+        "stdlib.h": "c"
+    }
+}

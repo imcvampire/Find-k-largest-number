@@ -1,16 +1,16 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-const int n = 1000000000;
-const int k = 600000;
+#define n0 1000000000
+#define k 600000
 
 int f[k];
 
-void swap(int &a, int &b)
+void swap(int *a, int *b)
 {
-  int temp = a;
-  a = b;
-  b = temp;
+	int temp = *a;
+	*a = *b;
+	*b = temp;
 }
 
 int leftchildnode(int n)
@@ -31,27 +31,27 @@ int parentnode(int n)
 void shiftdown(int a[], int start, int count)
 {
 	int i = start;
-	
+
 	int imax = parentnode(count + 1);
 	while (i < imax)
 	{
 		int currentnodeindex = i;
 		int leftnodeindex = leftchildnode(i);
 		int rightnodeindex = rightchildnode(i);
-		
+
 		if (leftnodeindex < count && a[leftnodeindex] < a[i])
 		{
 			i = leftnodeindex;
 		}
-		
+
 		if (rightnodeindex < count && a[rightnodeindex] < a[i])
 		{
 			i = rightnodeindex;
 		}
-		
+
 		if (i != currentnodeindex)
 		{
-			swap(a[currentnodeindex], a[i]);
+			swap(&a[currentnodeindex], &a[i]);
 		}
 		else
 			break;
@@ -61,7 +61,7 @@ void shiftdown(int a[], int start, int count)
 void heapify(int a[], int count)
 {
 	int i;
-	
+
 	for (i = parentnode(count - 1); i > -1; --i)
 	{
 		shiftdown(a, i, count);
@@ -71,10 +71,10 @@ void heapify(int a[], int count)
 void heapsort(int a[], int count)
 {
 	int end = count - 1;
-	
+
 	while (end > 0)
 	{
-		swap(a[0], a[end]);
+		swap(&a[0], &a[end]);
 		shiftdown(a, 0, end);
 		--end;
 	}
@@ -92,10 +92,10 @@ int main(int argc, char const *argv[])
 
 	heapify(f, k);
 
-	for (i = 0; i < n; ++i)
+	for (i = 0; i < n0; ++i)
 	{
 		int temp = rand();
-		
+
 		if (temp > f[0])
 		{
 			f[0] = temp;
