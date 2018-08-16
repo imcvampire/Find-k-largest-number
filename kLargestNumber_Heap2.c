@@ -39,24 +39,24 @@ void shiftdown(int a[], int start, int count)
 {
 	int i = start;
 
-	int imax = parentnode(count + 1);
-	while (i < imax)
+	int imin = parentnode(count + 1);
+	while (i < imin)
 	{
 		int currentnodeindex = i;
 		int leftnodeindex = leftchildnode(i);
 		int rightnodeindex = rightchildnode(i);
 
-		if (leftnodeindex < count && a[leftnodeindex] < a[i])
+		if (leftnodeindex < count && a[leftnodeindex] > a[i])
 		{
 			i = leftnodeindex;
 		}
 
-		if (rightnodeindex < count && a[rightnodeindex] < a[i])
+		if (rightnodeindex < count && a[rightnodeindex] > a[i])
 		{
 			i = rightnodeindex;
 		}
 
-		// Swap with the lowest value in the triplet
+		// Swap with the greatest value in the triplet
 		if (i != currentnodeindex)
 		{
 			swap(&a[currentnodeindex], &a[i]);
@@ -108,7 +108,7 @@ int main(int argc, char const *argv[])
 	heapify(f, n0);
 
 	/**
-	 * Each min value will be popped out until we receive the right amount of
+	 * Each max value will be popped out until we receive the right amount of
 	 * numbers.
 	 * The complexity is O{log(n0 - 1) + log(n0 - 2) + ... + log(n0 - k)} 
 	 * */
@@ -122,7 +122,7 @@ int main(int argc, char const *argv[])
 		add(f[0]);
 	}
 
-	// The result contains min values
+	// The result contains max values
 
 	free(f);
 	free(result);

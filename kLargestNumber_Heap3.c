@@ -39,19 +39,19 @@ void shiftdown(int a[], int start, int count)
 {
 	int i = start;
 
-	int imax = parentnode(count + 1);
-	while (i < imax)
+	int imin = parentnode(count + 1);
+	while (i < imin)
 	{
 		int currentnodeindex = i;
 		int leftnodeindex = leftchildnode(i);
 		int rightnodeindex = rightchildnode(i);
 
-		if (leftnodeindex < count && a[leftnodeindex] < a[i])
+		if (leftnodeindex < count && a[leftnodeindex] > a[i])
 		{
 			i = leftnodeindex;
 		}
 
-		if (rightnodeindex < count && a[rightnodeindex] < a[i])
+		if (rightnodeindex < count && a[rightnodeindex] > a[i])
 		{
 			i = rightnodeindex;
 		}
@@ -108,20 +108,18 @@ int main(int argc, char const *argv[])
 	heapify(f, n0 - k);
 
     /**
-     * For each of the rest k number. If its value is lower than min heap, it will be
-     * added to the result array (because it's lower than n0 - k other number).
-     * Otherwise, it would replace the min heap value. The heap will be heapify 
-     * and the min value will be pushed to the result.
+     * For each of the rest k number. If its value is greater than max heap, it will be
+     * added to the result array (because it's greater than n0 - k other number).
+     * Otherwise, it would replace the max heap value. The heap will be heapify 
+     * again and the max value will be pushed to the result array.
      * 
      * The complexity is log(n0 - 1) + log(n0 - 2) + ... + log(n0 - k)
      * */
 
-	add(f[0]);
-
-	for (i = 1; i < k; ++i)
+	for (i = 0; i < k; ++i)
 	{
         temp = rand();
-        if (temp >= f[0])
+        if (temp <= f[0])
         {
             add(f[0]);
             f[0] = temp;
@@ -133,7 +131,7 @@ int main(int argc, char const *argv[])
         }
 	}
 
-    // The result will contains min values
+    // The result will contains max values
 
 	free(f);
 	free(result);
