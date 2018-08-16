@@ -2,7 +2,7 @@
 #include "stdlib.h"
 
 #define n0 100000000
-#define k  600000
+#define k 600000
 
 int *f;
 
@@ -85,7 +85,8 @@ int main(int argc, char const *argv[])
 	int i, j;
 	f = (int *) malloc(n0 * sizeof(int));
 
-	if (f == NULL) {
+	if (f == NULL)
+	{
 		return -1;
 	}
 
@@ -95,19 +96,14 @@ int main(int argc, char const *argv[])
 		f[i] = rand();
 	}
 
-	// nlogn
-	heapify(f, n0 - k);
+	// n0
+	heapify(f, n0);
 
-	// klogn
-	for (i = 0; i < k; ++i)
+	// log(n0 - 1) + log(n0 - 2) + ... + log(n0 - k)
+	for (i = 1; i < k; ++i)
 	{
-		int temp = rand();
-
-		if (temp > f[0])
-		{
-			f[0] = temp;
-			shiftdown(f, 0, n0 - k);
-		}
+		f[0] = f[n0 - i - 1];
+		shiftdown(f, 0, n0 - i);
 	}
 
 	free(f);
