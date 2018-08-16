@@ -83,7 +83,11 @@ void heapsort(int a[], int count)
 int main(int argc, char const *argv[])
 {
 	int i, j;
-	f = malloc(n0 * sizeof(int));
+	f = (int *) malloc(n0 * sizeof(int));
+
+	if (f == NULL) {
+		return -1;
+	}
 
 	// generate k number
 	for (i = 0; i < n0 - k; ++i)
