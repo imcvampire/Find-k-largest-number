@@ -1,7 +1,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-#define n0 400000000
+#define n0 100000000
 #define k  600000
 
 int *f;
@@ -95,18 +95,8 @@ int main(int argc, char const *argv[])
 		f[i] = rand();
 	}
 
+	// (n0 - k)
 	heapify(f, n0 - k);
-
-	for (i = 0; i < k; ++i)
-	{
-		int temp = rand();
-
-		if (temp > f[0])
-		{
-			f[0] = temp;
-			shiftdown(f, 0, n0 - k);
-		}
-	}
 
 	free(f);
 
