@@ -56,7 +56,7 @@ void shiftdown(int a[], int start, int count)
 			i = rightnodeindex;
 		}
 
-		// Swap with the lowest value in the triplet
+        // Swap with the lowest valud in the triplet
 		if (i != currentnodeindex)
 		{
 			swap(&a[currentnodeindex], &a[i]);
@@ -90,8 +90,8 @@ void heapsort(int a[], int count)
 
 int main(int argc, char const *argv[])
 {
-	int i, j;
-	f = (int *) malloc(n0 * sizeof(int));
+	int i, j, temp;
+	f = (int *) malloc((n0 - k) * sizeof(int));
 	result = (int *) malloc(k * sizeof(int));
 
 	if (f == NULL)
@@ -99,30 +99,41 @@ int main(int argc, char const *argv[])
 		return -1;
 	}
 
-	for (i = 0; i < n0; ++i)
+	for (i = 0; i < n0 - k; ++i)
 	{
 		f[i] = rand();
 	}
 
-	// Build the heap of n0 numbers. Cost: O(n0)
-	heapify(f, n0);
+	// Build the heap of (n0 - k) numbers. Cost: O(n0 - k)
+	heapify(f, n0 - k);
 
-	/**
-	 * Each min value will be popped out until we receive the right amount of
-	 * numbers.
-	 * The complexity is O{log(n0 - 1) + log(n0 - 2) + ... + log(n0 - k)} 
-	 * */
+    /**
+     * For each of the rest k number. If its value is lower than min heap, it will be
+     * added to the result array (because it's lower than n0 - k other number).
+     * Otherwise, it would replace the min heap value. The heap will be heapify 
+     * and the min value will be pushed to the result.
+     * 
+     * The complexity is log(n0 - 1) + log(n0 - 2) + ... + log(n0 - k)
+     * */
 
 	add(f[0]);
 
 	for (i = 1; i < k; ++i)
 	{
-		f[0] = f[n0 - i - 1];
-		shiftdown(f, 0, n0 - i);
-		add(f[0]);
+        temp = rand();
+        if (temp >= f[0])
+        {
+            add(f[0]);
+            f[0] = temp;
+            shiftdown(f, 0, n0 - k);
+        }
+        else
+        {
+            add(temp);
+        }
 	}
 
-	// The result contains min values
+    // The result will contains min values
 
 	free(f);
 	free(result);

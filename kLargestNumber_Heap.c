@@ -5,6 +5,7 @@
 #define k 600000
 
 int *f;
+int *result;
 
 void swap(int *a, int *b)
 {
@@ -49,6 +50,7 @@ void shiftdown(int a[], int start, int count)
 			i = rightnodeindex;
 		}
 
+		// Swap with the lowest value in the triplet
 		if (i != currentnodeindex)
 		{
 			swap(&a[currentnodeindex], &a[i]);
@@ -82,27 +84,33 @@ void heapsort(int a[], int count)
 
 int main(int argc, char const *argv[])
 {
-	int i, j;
+	int i, temp;
 	f = (int *) malloc(k * sizeof(int));
 
 	if (f == NULL) {
 		return -1;
 	}
 
-	// generate k number
+	// generate k numbers
 	for (i = 0; i < k; ++i)
 	{
 		f[i] = rand();
 	}
 
-	// k
+	// k min heap
 	heapify(f, k);
 
-	// nlogk
-	for (i = 0; i < n0; ++i)
+	// (n0 - k)logk
+	for (i = 0; i < n0 - k; ++i)
 	{
-		int temp = rand();
+		// Generate n0 - k numbers
+		temp = rand();
 
+		/**
+		 * If the new int value is greater than the lowest value of the
+		 * array, then it will be replaced. The heap will be heapified
+		 * again. The complexity is (n0 - k)logk.
+		 * */ 
 		if (temp > f[0])
 		{
 			f[0] = temp;
@@ -110,7 +118,9 @@ int main(int argc, char const *argv[])
 		}
 	}
 
-	free(f);
+	result = f;
+
+	free(result);
 
 	return 0;
 }
