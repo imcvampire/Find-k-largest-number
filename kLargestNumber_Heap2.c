@@ -1,10 +1,10 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-#define n0 1000000
+#define n0 1000000000
 #define k  600000
 
-int f[k];
+int *f;
 
 void swap(int *a, int *b)
 {
@@ -83,6 +83,7 @@ void heapsort(int a[], int count)
 int main(int argc, char const *argv[])
 {
 	int i, j;
+	f = malloc(n0 * sizeof(int));
 
 	// generate k number
 	for (i = 0; i < n0 - k; ++i)
@@ -102,6 +103,8 @@ int main(int argc, char const *argv[])
 			shiftdown(f, 0, n0 - k);
 		}
 	}
+
+	free(f);
 
 	return 0;
 }
